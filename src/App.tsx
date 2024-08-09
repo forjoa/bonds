@@ -4,6 +4,7 @@ import Home from './components/pages/Home'
 import Search from './components/pages/Search'
 import Messages from './components/pages/Messages'
 import Notifications from './components/pages/Notifications'
+import Upload from './components/pages/Upload'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/search' element={<Search />} />
         <Route path='/messages' element={<Messages />} />
         <Route path='/notifications' element={<Notifications />} />
+        <Route path='/upload' element={<Upload />} />
       </Routes>
     </Router>
   )
