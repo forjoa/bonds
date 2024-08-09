@@ -1,0 +1,37 @@
+@import url('index.css');
+
+.navigation-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(100dvh - 40px);
+    width: 150px;
+    margin: 20px;
+    border: 1px solid #222;
+    padding: 30px 10px;
+    border-radius: 10px;
+
+    & .navigation-content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        & .title {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            & img {
+                width: 50px;
+            }
+        }
+
+        & .navigation-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+}
