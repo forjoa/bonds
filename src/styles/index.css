@@ -23,6 +23,10 @@ h6 {
   text-wrap: balance;
 }
 
+#root {
+  display: flex;
+}
+
 body {
   margin: 0;
   padding: 0;
