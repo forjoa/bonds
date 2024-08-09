@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './components/pages/Home'
 import Nav from './components/Nav'
+import Home from './components/pages/Home'
 import Search from './components/pages/Search'
+import Messages from './components/pages/Messages'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/search' element={<Search />} />
+        <Route path='/messages' element={<Messages />} />
       </Routes>
     </Router>
   )
