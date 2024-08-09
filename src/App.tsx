@@ -3,6 +3,7 @@ import Nav from './components/Nav'
 import Home from './components/pages/Home'
 import Search from './components/pages/Search'
 import Messages from './components/pages/Messages'
+import Notifications from './components/pages/Notifications'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/search' element={<Search />} />
         <Route path='/messages' element={<Messages />} />
+        <Route path='/notifications' element={<Notifications />} />
       </Routes>
     </Router>
   )
