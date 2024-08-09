@@ -27,6 +27,10 @@ h6 {
   display: flex;
 }
 
+.container {
+  margin: 20px;
+}
+
 body {
   margin: 0;
   padding: 0;
