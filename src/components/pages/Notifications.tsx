@@ -1,7 +1,9 @@
+import Container from '../ui/Container'
+
 export default function Notifications() {
-    return (
-      <main className='container'>
-        <h1>Notifications</h1>
-      </main>
-    )
-  }
+  return (
+    <Container>
+      <h1>Notifications</h1>
+    </Container>
+  )
+}
