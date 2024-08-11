@@ -1,7 +1,9 @@
+import Container from '../ui/Container'
+
 export default function Messages() {
-    return (
-      <main className='container'>
-        <h1>Messages</h1>
-      </main>
-    )
-  }
+  return (
+    <Container>
+      <h1>Messages</h1>
+    </Container>
+  )
+}
