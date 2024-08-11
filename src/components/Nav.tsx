@@ -22,26 +22,31 @@ export default function Nav() {
       icon: IconHome,
       iconSelected: IconHomeFilled,
       route: '/',
+      name: 'Home',
     },
     {
       icon: IconSearch,
       iconSelected: IconSearch,
       route: '/search',
+      name: 'Search',
     },
     {
       icon: IconMessage,
       iconSelected: IconMessageFilled,
       route: '/messages',
+      name: 'Chat',
     },
     {
       icon: IconBell,
       iconSelected: IconBellFilled,
       route: '/notifications',
+      name: 'Alerts',
     },
     {
       icon: IconCirclePlus,
       iconSelected: IconCirclePlusFilled,
       route: '/upload',
+      name: 'Upload',
     },
   ]
 
@@ -58,9 +63,15 @@ export default function Nav() {
               <li key={index}>
                 <Link to={route.route}>
                   {pathname === route.route ? (
-                    <route.iconSelected size={40} />
+                    <>
+                      <route.iconSelected size={30} />
+                      <p>{route.name}</p>
+                    </>
                   ) : (
-                    <route.icon size={40} />
+                    <>
+                      <route.icon size={30} />
+                      <p>{route.name}</p>
+                    </>
                   )}
                 </Link>
               </li>
