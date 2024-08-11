@@ -1,7 +1,9 @@
+import Container from '../ui/Container'
+
 export default function Upload() {
-    return (
-      <main className='container'>
-        <h1>Upload</h1>
-      </main>
-    )
-  }
+  return (
+    <Container>
+      <h1>Upload</h1>
+    </Container>
+  )
+}
