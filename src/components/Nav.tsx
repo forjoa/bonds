@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import {
   IconHome,
   IconHomeFilled,
@@ -16,6 +16,7 @@ import '../styles/nav.css'
 
 export default function Nav() {
   const { pathname } = useLocation()
+  const navigation = useNavigate()
 
   const routes = [
     {
@@ -50,6 +51,12 @@ export default function Nav() {
     },
   ]
 
+  function logOut() {
+    navigation('/login')
+
+    // logic to delete session
+  }
+
   return (
     <nav className='navigation-bar'>
       <div className='navigation-content'>
@@ -79,7 +86,7 @@ export default function Nav() {
           })}
         </ul>
       </div>
-      <button>
+      <button onClick={logOut}>
         <IconLogout size={40} />
       </button>
     </nav>
