@@ -1,12 +1,9 @@
-import ButtonAdd from '../ui/Button'
+import Container from '../ui/Container'
 
 export default function Home() {
   return (
-    <main className='container'>
+    <Container>
       <h1>Home</h1>
-      <div className='card'>
-        <ButtonAdd />
-      </div>
-    </main>
+    </Container>
   )
 }
