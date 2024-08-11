@@ -1,7 +1,9 @@
+import Container from '../ui/Container'
+
 export default function Search() {
   return (
-    <main className='container'>
+    <Container>
       <h1>Search</h1>
-    </main>
+    </Container>
   )
 }
