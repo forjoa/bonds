@@ -2,6 +2,7 @@
 
 :root {
   --gray: #222;
+  --light-gray: #444;
 }
 
 html,
@@ -120,4 +121,23 @@ td {
   width: 100%;
   border-radius: 10px;
   padding: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--light-gray);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
