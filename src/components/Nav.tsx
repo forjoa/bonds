@@ -13,8 +13,13 @@ import {
   IconLogout,
 } from '@tabler/icons-react'
 import '../styles/nav.css'
+import { ReactNode } from 'react'
 
-export default function Nav() {
+interface NavProps {
+  children: ReactNode
+}
+
+export default function Nav({ children }: NavProps) {
   const { pathname } = useLocation()
   const navigation = useNavigate()
 
@@ -58,37 +63,40 @@ export default function Nav() {
   }
 
   return (
-    <nav className='navigation-bar'>
-      <div className='navigation-content'>
-        <section className='title'>
-          <img src='/icon.png' alt='Icon' />
-          <h1>Bonds</h1>
-        </section>
-        <ul className='navigation-list'>
-          {routes.map((route, index) => {
-            return (
-              <li key={index}>
-                <Link to={route.route}>
-                  {pathname === route.route ? (
-                    <>
-                      <route.iconSelected size={30} />
-                      <p>{route.name}</p>
-                    </>
-                  ) : (
-                    <>
-                      <route.icon size={30} />
-                      <p>{route.name}</p>
-                    </>
-                  )}
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-      <button onClick={logOut}>
-        <IconLogout size={40} />
-      </button>
-    </nav>
+    <>
+      <nav className='navigation-bar'>
+        <div className='navigation-content'>
+          <section className='title'>
+            <img src='/icon.png' alt='Icon' />
+            <h1>Bonds</h1>
+          </section>
+          <ul className='navigation-list'>
+            {routes.map((route, index) => {
+              return (
+                <li key={index}>
+                  <Link to={route.route}>
+                    {pathname === route.route ? (
+                      <>
+                        <route.iconSelected size={30} />
+                        <p>{route.name}</p>
+                      </>
+                    ) : (
+                      <>
+                        <route.icon size={30} />
+                        <p>{route.name}</p>
+                      </>
+                    )}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        <button onClick={logOut}>
+          <IconLogout size={40} />
+        </button>
+      </nav>
+      {children}
+    </>
   )
 }
