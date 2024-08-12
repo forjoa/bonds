@@ -1,0 +1,20 @@
+@import url('index.css');
+
+.modal-layout {
+    min-height: 100dvh;
+    min-width: 100dvw;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.185);
+    backdrop-filter: blur(24px);
+    display: grid;
+    place-items: center;
+
+    & .modal {
+        background-color: var(--gray);
+        padding: 20px;
+        border-radius: 10px;
+        min-width: 50%;
+        max-height: 50%;
+        overflow-y: auto;
+    }
+}
