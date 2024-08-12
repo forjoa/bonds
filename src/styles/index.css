@@ -95,10 +95,21 @@ textarea,
 select {
   font-family: inherit;
   font-size: 100%;
-  border: none;
   background: none;
-  outline: none;
   box-sizing: border-box;
+  border: 1px solid var(--light-gray);
+  padding: 10px 15px;
+  border-radius: 5px;
+  width: 100%;
+
+  &[type='submit'] {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  & :focus {
+    outline: solid 1px white;
+  }
 }
 
 button {
