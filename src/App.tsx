@@ -19,9 +19,11 @@ function App() {
           <Route path='/messages' element={<Messages />} />
           <Route path='/notifications' element={<Notifications />} />
           <Route path='/upload' element={<Upload />} />
-          <Route path='/login' element={<Login />} />
         </Routes>
       </Nav>
+      <Routes>
+        <Route path='/login' element={<Login />} />
+      </Routes>
     </Router>
   )
 }
