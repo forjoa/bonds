@@ -57,9 +57,8 @@ export default function Nav({ children }: NavProps) {
   ]
 
   function logOut() {
+    localStorage.removeItem('userbonds')
     navigation('/login')
-
-    // logic to delete session
   }
 
   return (
