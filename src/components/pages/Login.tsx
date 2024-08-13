@@ -2,10 +2,12 @@ import Modal from '../ui/Modal'
 import '../../styles/login.css'
 import { FormEvent, useState } from 'react'
 import { toast } from 'sonner'
+import { useNavigate } from 'react-router'
 
 export default function Login() {
   const [email, setEmail] = useState<string>()
   const [password, setPassword] = useState<string>()
+  const navigate = useNavigate()
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -23,6 +25,9 @@ export default function Login() {
 
       if (!result.success) {
         toast.error(result.message)
+      } else {
+        localStorage.setItem('userbonds', result.token)
+        navigate('/')
       }
     } catch (e) {
       toast.error(e as string)
