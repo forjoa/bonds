@@ -35,10 +35,6 @@ h6 {
   display: flex;
 }
 
-.container {
-  margin: 20px;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -135,6 +131,8 @@ td {
   width: 100%;
   border-radius: 10px;
   padding: 20px;
+  margin: 20px 20px 20px 0px;
+  overflow-y: scroll;
 }
 
 .subtitle {
