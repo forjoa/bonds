@@ -14,19 +14,20 @@ function App() {
     <Router>
       <Toaster position='bottom-right' />
       <Nav>
-        <ProtectedRoutes>
-          <Routes>
+        <Routes>
+          {/* protected routes */}
+          <Route element={<ProtectedRoutes />}>
             <Route path='/' element={<Home />} />
             <Route path='/search' element={<Search />} />
             <Route path='/messages' element={<Messages />} />
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/upload' element={<Upload />} />
-          </Routes>
-        </ProtectedRoutes>
+          </Route>
+
+          {/* public routes */}
+          <Route path='/login' element={<Login />} />
+        </Routes>
       </Nav>
-      <Routes>
-        <Route path='/login' element={<Login />} />
-      </Routes>
     </Router>
   )
 }
