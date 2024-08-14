@@ -13,6 +13,7 @@ export interface UserI {
 }
 
 export interface UserContextType {
+  tokenIsValid: boolean
   user: UserI | object
   setUser: Dispatch<SetStateAction<UserI>>
 }
