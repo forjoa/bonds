@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
+import { PropsWithChildren } from 'react'
 
-export default function Container({ children }: { children: ReactNode }) {
+export default function Container({ children }: PropsWithChildren) {
   return <main className='container'>{children}</main>
 }

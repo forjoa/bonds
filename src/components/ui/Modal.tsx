@@ -1,10 +1,7 @@
-import { ReactNode } from 'react'
+import { PropsWithChildren } from 'react'
 import '../../styles/modal.css'
 
-interface ModalProps {
-  children: ReactNode
-}
-export default function Modal({ children }: ModalProps) {
+export default function Modal({ children }: PropsWithChildren) {
   return (
     <main className='modal-layout'>
       <section className='modal'>{children}</section>
