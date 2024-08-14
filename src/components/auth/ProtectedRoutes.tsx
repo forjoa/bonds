@@ -1,9 +1,16 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import { useUser } from '../../context/AppContext'
+import Loading from '../ui/Loading'
 
 export default function ProtectedRoutes() {
-  const user = localStorage.getItem('userbonds')
+  const localUser = localStorage.getItem('userbonds')
+  const { tokenIsValid, loading } = useUser()
 
-  // comprobation to check if token is valid
+  if (loading) {
+    return <Loading />
+  }
 
-  return user ? <Outlet /> : <Navigate to='/login' />
+  if (!localUser || !tokenIsValid) return <Navigate to='/login' />
+
+  return <Outlet />
 }
