@@ -11,31 +11,40 @@ const UserContext = createContext<UserContextType>({
   tokenIsValid: false,
   user: {},
   setUser: () => {},
+  loading: true,
 })
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState({})
   const [tokenIsValid, setTokenIsValid] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const token = localStorage.getItem('userbonds')
+
+    if (!token) {
+      setLoading(false)
+      return
+    }
+
     fetch(`${import.meta.env.VITE_API_URL}/api/auth/verifyToken`, {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        token: localStorage.getItem('userbonds'),
-      }),
+      body: JSON.stringify({ token }),
     })
       .then((res) => res.json())
       .then((response) => {
         setTokenIsValid(response.success)
-        setUser(response.user)
+        setUser(response.user || {})
+        setLoading(false) 
       })
+      .catch(() => setLoading(false)) 
   }, [])
 
   return (
-    <UserContext.Provider value={{ tokenIsValid, user, setUser }}>
+    <UserContext.Provider value={{ tokenIsValid, user, setUser, loading }}>
       {children}
     </UserContext.Provider>
   )
