@@ -12,9 +12,33 @@ export interface UserI {
   username: string
 }
 
+export interface NotificationI {
+  notificationid: number
+  userid: number
+  type: string
+  referenceid: number
+  seen: boolean
+  createdat: Date
+}
+
+export interface MessageI {
+  messageid: number
+  userid: number
+  conversationid: number
+  content: string
+  createdat: Date
+}
+
 export interface UserContextType {
   tokenIsValid: boolean
   user: UserI | object
   setUser: Dispatch<SetStateAction<UserI>>
   loading: boolean
+}
+
+export interface SocketContextType {
+  notifications: NotificationI[]
+  messages: MessageI[]
+  sendMessage: (room: string, msg: string) => void
+  joinRoom: (room: string) => void
 }
