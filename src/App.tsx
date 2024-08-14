@@ -8,26 +8,29 @@ import Upload from './components/pages/Upload'
 import Login from './components/pages/Login'
 import ProtectedRoutes from './components/auth/ProtectedRoutes'
 import { Toaster } from 'sonner'
+import { UserProvider } from './context/AppContext'
 
 function App() {
   return (
     <Router>
-      <Toaster position='bottom-right' />
-      <Nav>
-        <Routes>
-          {/* protected routes */}
-          <Route element={<ProtectedRoutes />}>
-            <Route path='/' element={<Home />} />
-            <Route path='/search' element={<Search />} />
-            <Route path='/messages' element={<Messages />} />
-            <Route path='/notifications' element={<Notifications />} />
-            <Route path='/upload' element={<Upload />} />
-          </Route>
+      <UserProvider>
+        <Toaster position='bottom-right' />
+        <Nav>
+          <Routes>
+            {/* protected routes */}
+            <Route element={<ProtectedRoutes />}>
+              <Route path='/' element={<Home />} />
+              <Route path='/search' element={<Search />} />
+              <Route path='/messages' element={<Messages />} />
+              <Route path='/notifications' element={<Notifications />} />
+              <Route path='/upload' element={<Upload />} />
+            </Route>
 
-          {/* public routes */}
-          <Route path='/login' element={<Login />} />
-        </Routes>
-      </Nav>
+            {/* public routes */}
+            <Route path='/login' element={<Login />} />
+          </Routes>
+        </Nav>
+      </UserProvider>
     </Router>
   )
 }
