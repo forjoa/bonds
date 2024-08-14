@@ -1,0 +1,11 @@
+@import url('index.css');
+
+.loading {
+    min-height: 100dvh;
+    min-width: 100dvw;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.185);
+    backdrop-filter: blur(24px);
+    display: grid;
+    place-items: center;
+}
