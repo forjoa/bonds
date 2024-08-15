@@ -1,0 +1,32 @@
+.upload-photo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+
+    & input[type='file'] {
+        display: none;
+    }
+
+    & .custom-file-upload {
+        display: flex;
+        justify-content: center;
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: var(--light-gray);
+        color: white;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #357ab8;
+        }
+    }
+
+    & img {
+        max-width: 50%;
+        height: auto;
+        border-radius: 8px;
+    }
+}
