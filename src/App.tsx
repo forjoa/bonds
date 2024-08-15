@@ -10,6 +10,7 @@ import ProtectedRoutes from './components/auth/ProtectedRoutes'
 import { Toaster } from 'sonner'
 import { UserProvider } from './context/AppContext'
 import { SocketProvider } from './context/SocketContext'
+import Register from './components/pages/Register'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
 
               {/* public routes */}
               <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
             </Routes>
           </Nav>
         </SocketProvider>
