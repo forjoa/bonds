@@ -2,13 +2,14 @@ import { Dispatch, SetStateAction } from 'react'
 
 export interface UserI {
   bio: string
-  createdat: Date
+  createdat?: Date
   email: string
+  password?: string
   fullname: string
   phone: string
   profilephoto: string | null
-  updatedat: Date
-  userid: number
+  updatedat?: Date
+  userid?: number
   username: string
 }
 
