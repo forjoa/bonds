@@ -11,16 +11,17 @@ interface RegisterPhotoI {
 export default function RegisterPhoto({ setUser }: RegisterPhotoI) {
   const presetname = import.meta.env.VITE_PRESET_NAME ?? 'bondsimages'
 
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState<string>('')
   const [loading, setLoading] = useState<boolean | null>(null)
 
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
+    if (!files?.length) return
+
     const data = new FormData()
-    if (files) {
-      data.append('file', files[0])
-      data.append('upload_preset', presetname)
-    }
+    data.append('file', files[0])
+    data.append('upload_preset', presetname)
+
     setLoading(true)
 
     try {
@@ -35,23 +36,24 @@ export default function RegisterPhoto({ setUser }: RegisterPhotoI) {
         ...prevUser,
         profilephoto: file.secure_url,
       }))
-      setLoading(false)
     } catch {
       toast.error('Error uploading image.')
+    } finally {
       setLoading(false)
     }
   }
+
   return (
     <div className='upload-photo-container'>
       <span>Profile photo</span>
 
-      {image === '' && (
+      {!image && (
         <>
           <input
             type='file'
             id='file-upload'
             name='file'
-            onChange={(e) => uploadImage(e)}
+            onChange={uploadImage}
           />
           <label htmlFor='file-upload' className='custom-file-upload'>
             <IconUpload stroke={1.5} />
@@ -59,12 +61,11 @@ export default function RegisterPhoto({ setUser }: RegisterPhotoI) {
         </>
       )}
 
-      {loading !== null &&
-        (loading ? (
-          <span className='subtitle'>Loading...</span>
-        ) : (
-          image && <img src={image} alt='Uploaded image' />
-        ))}
+      {loading ? (
+        <span className='subtitle'>Loading...</span>
+      ) : (
+        image && <img src={image} alt='Uploaded image' />
+      )}
     </div>
   )
 }
