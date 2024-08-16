@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router'
 import { UserI } from '../../types/types'
 import RegisterPhoto from '../cloudinary/RegisterPhoto'
 import { Link } from 'react-router-dom'
+import { toast } from 'sonner'
 
 export default function Register() {
   const [user, setUser] = useState<UserI>({
@@ -20,10 +21,34 @@ export default function Register() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log(user);
-    
-    // Aquí puedes manejar el envío del formulario
-    navigate('/login')
+
+    const isFormComplete = Object.values(user).every((value) => value !== '')
+
+    if (isFormComplete) {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/register`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+          }
+        )
+        const result = await response.json()
+
+        if (!result.success) {
+          toast.error(result.message)
+        } else {
+          navigate('/login')
+        }
+      } catch {
+        toast.error('Error during registration.')
+      }
+    } else {
+      toast.error('Complete all the form, please.')
+    }
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +110,9 @@ export default function Register() {
 
         <input type='submit' value='Send' />
       </form>
-      <Link to='/login' className='link-form'>Sign in</Link>
+      <Link to='/login' className='link-form'>
+        Sign in
+      </Link>
     </Modal>
   )
 }
