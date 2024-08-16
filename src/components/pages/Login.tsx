@@ -3,6 +3,7 @@ import '../../styles/login.css'
 import { FormEvent, useState } from 'react'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
   const [email, setEmail] = useState<string>()
@@ -50,6 +51,7 @@ export default function Login() {
 
         <input type='submit' value='Send' />
       </form>
+      <Link to='/register' className='link-form'>Sign up</Link>
     </Modal>
   )
 }

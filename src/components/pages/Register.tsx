@@ -3,6 +3,7 @@ import Modal from '../ui/Modal'
 import { useNavigate } from 'react-router'
 import { UserI } from '../../types/types'
 import RegisterPhoto from '../cloudinary/RegisterPhoto'
+import { Link } from 'react-router-dom'
 
 export default function Register() {
   const [user, setUser] = useState<UserI>({
@@ -84,6 +85,7 @@ export default function Register() {
 
         <input type='submit' value='Send' />
       </form>
+      <Link to='/login' className='link-form'>Sign in</Link>
     </Modal>
   )
 }

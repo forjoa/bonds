@@ -139,6 +139,14 @@ td {
   color: var(--subtitle)
 }
 
+.link-form {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  text-decoration: underline;
+  margin-top: 10px;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 12px;
