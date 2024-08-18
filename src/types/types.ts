@@ -43,3 +43,11 @@ export interface SocketContextType {
   sendMessage: (room: string, msg: string) => void
   joinRoom: (room: string) => void
 }
+
+export interface PostsHomeI {
+  postid: 1
+  content: string
+  createdat: Date
+  username: string
+  userid: number
+}
