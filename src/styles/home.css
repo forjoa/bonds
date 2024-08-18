@@ -1,0 +1,45 @@
+@import url('index.css');
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & section {
+        width: 100%;
+        padding: 0 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+
+        & header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            & img {
+                aspect-ratio: 1 / 1;
+                width: 70px;
+                border-radius: 50%;
+            }
+        }
+
+        & main {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            & img {
+                border-radius: 10px;
+                aspect-ratio: auto;
+                max-height: 400px;
+            }
+
+            & .flicking-camera {
+                display: flex;
+                gap: 10px;
+            }
+        }
+    }
+}
