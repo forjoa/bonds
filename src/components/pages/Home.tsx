@@ -21,7 +21,7 @@ export default function Home() {
       <h1>Home</h1>
       {posts.map((post, index) => (
         <div key={index}>
-          <p>{post.content}</p>
+          <p>{JSON.stringify(post)}</p>
         </div>
       ))}
     </Container>
