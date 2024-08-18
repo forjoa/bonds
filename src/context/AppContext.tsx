@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react'
-import { UserContextType } from '../types/types'
+import { UserContextType, UserI } from '../types/types'
 
 const UserContext = createContext<UserContextType>({
   tokenIsValid: false,
@@ -15,7 +15,7 @@ const UserContext = createContext<UserContextType>({
 })
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState<UserI | object>({})
   const [tokenIsValid, setTokenIsValid] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -38,9 +38,9 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
       .then((response) => {
         setTokenIsValid(response.success)
         setUser(response.user || {})
-        setLoading(false) 
+        setLoading(false)
       })
-      .catch(() => setLoading(false)) 
+      .catch(() => setLoading(false))
   }, [])
 
   return (
