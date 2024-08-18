@@ -50,4 +50,5 @@ export interface PostsHomeI {
   createdat: Date
   username: string
   userid: number
+  photos: string[]
 }
