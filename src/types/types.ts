@@ -44,6 +44,15 @@ export interface SocketContextType {
   joinRoom: (room: string) => void
 }
 
+export interface CommentInPostI {
+  commentid: number
+  content: string
+  createdat: Date
+  userid: number
+  fullname: string
+  username: string
+}
+
 export interface PostsHomeI {
   postid: 1
   content: string
@@ -53,4 +62,7 @@ export interface PostsHomeI {
   fullname: string
   profilephoto: string
   photos: string[]
+  likecount: number
+  userliked: boolean
+  comments: CommentInPostI[]
 }
