@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { PostsHomeI } from '../../types/types'
+import { CommentInPostI, PostsHomeI } from '../../types/types'
 import Flicking from '@egjs/react-flicking'
 import '@egjs/react-flicking/dist/flicking.css'
 import {
@@ -17,6 +17,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
   const [showComments, setShowComments] = useState<boolean>(false)
   const [userLiked, setUserLiked] = useState<boolean>(post.userliked)
   const [likeCount, setLikeCount] = useState<number>(post.likecount)
+  const [comments, setComments] = useState<CommentInPostI[]>(post.comments)
   const [comment, setComment] = useState<string>('')
   const navigate = useNavigate()
   const [, updateState] = useState<object>()
@@ -24,7 +25,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
   const { socket } = useSocket()
   const { user } = useUser()
 
-  const handleLike = async () => {
+  const onLike = async () => {
     const newLikeState = !userLiked
     setUserLiked(newLikeState)
     setLikeCount(newLikeState ? likeCount + 1 : likeCount - 1)
@@ -48,7 +49,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
     }
   }
 
-  const handleComment = async (e: FormEvent<HTMLFormElement>) => {
+  const onComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (comment.trim() !== '' && 'userid' in user) {
@@ -68,6 +69,10 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
       ).then((res) => res.json())
 
       if (result.success) {
+        setComments([
+          ...comments,
+          { fullname: user.fullname, content: comment },
+        ])
         toast.success(result.message)
         forceUpdate()
       } else {
@@ -110,7 +115,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
         </Flicking>
       </main>
       <footer>
-        <button className='like' onClick={handleLike}>
+        <button className='like' onClick={onLike}>
           {userLiked ? (
             <IconHeartFilled color='#DD3C3C' stroke={1.5} />
           ) : (
@@ -118,7 +123,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
           )}
           {likeCount}
         </button>
-        <form onSubmit={handleComment}>
+        <form onSubmit={onComment}>
           <input
             type='text'
             placeholder='Comment here'
@@ -144,10 +149,19 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
         </button>
         {showComments && (
           <div className='comments'>
-            {post.comments.map((comment, index) => (
+            {comments.map((comment, index) => (
               <aside key={index}>
-                <p>{comment.fullname}</p>
-                <p>{comment.content}</p>
+                <div>
+                  <p>{comment.fullname}</p>
+                  <p>{comment.content}</p>
+                </div>
+                <small>
+                  {comment.createdat &&
+                    new Date(comment.createdat).toLocaleDateString('en-GB', {
+                      day: '2-digit',
+                      month: '2-digit',
+                    })}
+                </small>
               </aside>
             ))}
           </div>
