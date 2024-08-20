@@ -52,7 +52,7 @@ export const SocketProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <SocketContext.Provider
-      value={{ notifications, messages, sendMessage, joinRoom }}
+      value={{ notifications, messages, sendMessage, joinRoom, socket }} 
     >
       {children}
     </SocketContext.Provider>
