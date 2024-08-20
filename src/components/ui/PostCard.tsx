@@ -9,16 +9,27 @@ import {
   IconTriangle,
 } from '@tabler/icons-react'
 import { useState } from 'react'
+import { useSocket } from '../../context/SocketContext'
 
 export default function PostCard({ post }: { post: PostsHomeI }) {
   const [showComments, setShowComments] = useState<boolean>(false)
   const [userLiked, setUserLiked] = useState<boolean>(post.userliked)
   const [likeCount, setLikeCount] = useState<number>(post.likecount)
   const navigate = useNavigate()
+  const { socket } = useSocket()
 
-  function handleLike() {
-    setUserLiked(!userLiked)
-    setLikeCount(userLiked ? likeCount - 1 : likeCount + 1)
+  const handleLike = () => {
+    const newLikeState = !userLiked
+    setUserLiked(newLikeState)
+    setLikeCount(newLikeState ? likeCount + 1 : likeCount - 1)
+
+    if (socket) {
+      socket.emit('like', {
+        postId: post.postid,
+        userId: post.userid,
+        targetUserId: post.userid,
+      })
+    }
   }
 
   return (
