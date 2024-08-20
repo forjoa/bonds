@@ -16,7 +16,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
   const [likeCount, setLikeCount] = useState<number>(post.likecount)
   const navigate = useNavigate()
 
-  function handleLike () {
+  function handleLike() {
     setUserLiked(!userLiked)
     setLikeCount(userLiked ? likeCount - 1 : likeCount + 1)
   }
@@ -71,12 +71,12 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
         >
           {showComments ? (
             <>
-              <IconTriangle stroke={1.5} color='#3D63DD' />
+              <IconTriangle stroke={1.5} color='#3D63DD' size={16} />
               Hide comments
             </>
           ) : (
             <>
-              <IconTriangleInverted stroke={1.5} color='#3D63DD' />
+              <IconTriangleInverted stroke={1.5} color='#3D63DD' size={16} />
               Show comments
             </>
           )}
