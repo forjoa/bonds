@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
+import { Socket } from 'socket.io-client'
 
 export interface UserI {
   bio: string
@@ -42,6 +43,7 @@ export interface SocketContextType {
   messages: MessageI[]
   sendMessage: (room: string, msg: string) => void
   joinRoom: (room: string) => void
+  socket: Socket 
 }
 
 export interface CommentInPostI {
