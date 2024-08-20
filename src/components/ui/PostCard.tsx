@@ -10,6 +10,7 @@ import {
 } from '@tabler/icons-react'
 import { useState } from 'react'
 import { useSocket } from '../../context/SocketContext'
+import { useUser } from '../../context/AppContext'
 
 export default function PostCard({ post }: { post: PostsHomeI }) {
   const [showComments, setShowComments] = useState<boolean>(false)
@@ -17,8 +18,9 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
   const [likeCount, setLikeCount] = useState<number>(post.likecount)
   const navigate = useNavigate()
   const { socket } = useSocket()
+  const { user } = useUser()
 
-  const handleLike = () => {
+  const handleLike = async () => {
     const newLikeState = !userLiked
     setUserLiked(newLikeState)
     setLikeCount(newLikeState ? likeCount + 1 : likeCount - 1)
@@ -28,6 +30,16 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
         postId: post.postid,
         userId: post.userid,
         targetUserId: post.userid,
+      })
+    }
+
+    if ('userid' in user) {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/posts/like`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userid: user.userid, postid: post.postid }),
       })
     }
   }
