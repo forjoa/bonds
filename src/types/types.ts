@@ -43,16 +43,16 @@ export interface SocketContextType {
   messages: MessageI[]
   sendMessage: (room: string, msg: string) => void
   joinRoom: (room: string) => void
-  socket: Socket 
+  socket: Socket
 }
 
 export interface CommentInPostI {
-  commentid: number
+  commentid?: number
   content: string
-  createdat: Date
-  userid: number
+  createdat?: Date
+  userid?: number
   fullname: string
-  username: string
+  username?: string
 }
 
 export interface PostsHomeI {
