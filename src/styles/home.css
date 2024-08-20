@@ -3,6 +3,8 @@
 .posts-container {
     display: flex;
     flex-direction: column;
+    max-width: 75%;
+    margin: auto;
     gap: 20px;
 
     & section {
@@ -62,6 +64,7 @@
                 grid-area: like;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 gap: 5px;
                 border: none;
             }
@@ -83,15 +86,12 @@
                 gap: 5px;
 
                 & aside {
-                    background-color: var(--light-gray);
+                    border-top: 1px solid var(--light-gray);
+                    background: linear-gradient(to top, var(--light-gray), transparent);
                     padding: 10px;
                     border-radius: 10px;
                     display: flex;
                     gap: 10px;
-
-                    & p:first-child {
-                        font-weight: 800;
-                    }
 
                     & p:last-child {
                         font-weight: 200;
@@ -99,5 +99,11 @@
                 }
             }
         }
+    }
+}
+
+@media (width <=760px) {
+    .posts-container {
+        max-width: 100%;
     }
 }
