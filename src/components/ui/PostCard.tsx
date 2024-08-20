@@ -8,15 +8,19 @@ import {
   IconTriangleInverted,
   IconTriangle,
 } from '@tabler/icons-react'
-import { useState } from 'react'
+import { FormEvent, useCallback, useState } from 'react'
 import { useSocket } from '../../context/SocketContext'
 import { useUser } from '../../context/AppContext'
+import { toast } from 'sonner'
 
 export default function PostCard({ post }: { post: PostsHomeI }) {
   const [showComments, setShowComments] = useState<boolean>(false)
   const [userLiked, setUserLiked] = useState<boolean>(post.userliked)
   const [likeCount, setLikeCount] = useState<number>(post.likecount)
+  const [comment, setComment] = useState<string>('')
   const navigate = useNavigate()
+  const [, updateState] = useState<object>()
+  const forceUpdate = useCallback(() => updateState({}), [])
   const { socket } = useSocket()
   const { user } = useUser()
 
@@ -41,6 +45,36 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
         },
         body: JSON.stringify({ userid: user.userid, postid: post.postid }),
       })
+    }
+  }
+
+  const handleComment = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (comment.trim() !== '' && 'userid' in user) {
+      const result = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/posts/comment`,
+        {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userid: user.userid,
+            postid: post.postid,
+            content: comment.trim(),
+          }),
+        }
+      ).then((res) => res.json())
+
+      if (result.success) {
+        toast.success(result.message)
+        forceUpdate()
+      } else {
+        toast.error(result.message)
+      }
+    } else {
+      toast.error('You need to write a comment.')
     }
   }
 
@@ -84,8 +118,12 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
           )}
           {likeCount}
         </button>
-        <form>
-          <input type='text' placeholder='Comment here' />
+        <form onSubmit={handleComment}>
+          <input
+            type='text'
+            placeholder='Comment here'
+            onChange={(e) => setComment(e.target.value)}
+          />
           <input type='submit' value='Send' />
         </form>
         <button
