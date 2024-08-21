@@ -5,7 +5,6 @@
     flex-direction: column;
     max-width: 75%;
     margin: auto;
-    gap: 20px;
 
     & section {
         width: 100%;
