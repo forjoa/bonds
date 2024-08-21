@@ -21,7 +21,7 @@ export default function Upload() {
 
     if ('userid' in user && (content !== '' || files.length !== 0)) {
       const result = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/posts/upload`,
+        `${import.meta.env.VITE_API_URL}/api/posts/uploadPost`,
         {
           method: 'post',
           headers: {
