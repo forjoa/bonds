@@ -5,12 +5,14 @@ import { FormEvent, useState } from 'react'
 import { IconX } from '@tabler/icons-react'
 import { useUser } from '../../context/AppContext'
 import { toast } from 'sonner'
+import { useNavigate } from 'react-router'
 
 export default function Upload() {
   const [files, setFiles] = useState<string[]>([])
   const [loading, setLoading] = useState<boolean | null>(null)
   const [content, setContent] = useState<string>('')
   const { user } = useUser()
+  const navigate = useNavigate()
 
   const removeFile = (index: number) => {
     setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index))
@@ -33,6 +35,9 @@ export default function Upload() {
 
       if (result.success) {
         toast.success(result.message)
+        setTimeout(() => {
+          navigate('/')
+        }, 1500)
       } else {
         toast.error(result.message)
       }
