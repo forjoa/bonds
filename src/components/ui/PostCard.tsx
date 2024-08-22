@@ -8,7 +8,7 @@ import {
   IconTriangleInverted,
   IconTriangle,
 } from '@tabler/icons-react'
-import { FormEvent, useCallback, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useSocket } from '../../context/SocketContext'
 import { useUser } from '../../context/AppContext'
 import { toast } from 'sonner'
@@ -20,8 +20,6 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
   const [comments, setComments] = useState<CommentInPostI[]>(post.comments)
   const [comment, setComment] = useState<string>('')
   const navigate = useNavigate()
-  const [, updateState] = useState<object>()
-  const forceUpdate = useCallback(() => updateState({}), [])
   const { socket } = useSocket()
   const { user } = useUser()
 
@@ -51,7 +49,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
 
   const onComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    
     if (comment.trim() !== '' && 'userid' in user) {
       const result = await fetch(
         `${import.meta.env.VITE_API_URL}/api/posts/comment`,
@@ -68,13 +66,14 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
         }
       ).then((res) => res.json())
 
+      setComment('')
+      
       if (result.success) {
         setComments([
           ...comments,
           { fullname: user.fullname, content: comment },
         ])
         toast.success(result.message)
-        forceUpdate()
       } else {
         toast.error(result.message)
       }
