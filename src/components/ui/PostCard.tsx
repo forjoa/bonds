@@ -1,3 +1,4 @@
+import { forwardRef, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { CommentInPostI, PostsHomeI } from '../../types/types'
 import Flicking from '@egjs/react-flicking'
@@ -8,12 +9,15 @@ import {
   IconTriangleInverted,
   IconTriangle,
 } from '@tabler/icons-react'
-import { FormEvent, useState } from 'react'
 import { useSocket } from '../../context/SocketContext'
 import { useUser } from '../../context/AppContext'
 import { toast } from 'sonner'
 
-export default function PostCard({ post }: { post: PostsHomeI }) {
+interface PostCardProps {
+  post: PostsHomeI
+}
+
+const PostCard = forwardRef<HTMLDivElement, PostCardProps>(({ post }, ref) => {
   const [showComments, setShowComments] = useState<boolean>(false)
   const [userLiked, setUserLiked] = useState<boolean>(post.userliked)
   const [likeCount, setLikeCount] = useState<number>(post.likecount)
@@ -49,7 +53,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
 
   const onComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
+
     if (comment.trim() !== '' && 'userid' in user) {
       const result = await fetch(
         `${import.meta.env.VITE_API_URL}/api/posts/comment`,
@@ -67,7 +71,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
       ).then((res) => res.json())
 
       setComment('')
-      
+
       if (result.success) {
         setComments([
           ...comments,
@@ -83,7 +87,8 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
   }
 
   return (
-    <section>
+    <section ref={ref}>
+      {' '}
       <header>
         {post.profilephoto && <img src={post.profilephoto} alt='User photo' />}
         <nav onClick={() => navigate(`/users/${post.userid}`)}>
@@ -168,4 +173,6 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
       </footer>
     </section>
   )
-}
+})
+
+export default PostCard
