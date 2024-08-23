@@ -50,6 +50,10 @@
             }
         }
     }
+
+    & button {
+        border: none;
+    }
 }
 
 @media (width <=760px) {
