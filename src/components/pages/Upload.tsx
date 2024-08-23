@@ -49,6 +49,7 @@ export default function Upload() {
   return (
     <Container>
       <h1>Upload</h1>
+      <div className='upload-post-container'>
       <form className='upload-post' onSubmit={handleSubmit}>
         <input
           type='text'
@@ -85,6 +86,7 @@ export default function Upload() {
         )}
         <input type='submit' value='Upload post' className='submit' />
       </form>
+      </div>
     </Container>
   )
 }
