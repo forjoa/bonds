@@ -1,0 +1,21 @@
+.profile-header {
+    display: flex;
+    gap: 20px;
+
+    & section.image-container {
+        width: 150px;
+        aspect-ratio: 1 / 1;
+
+        & img {
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+    & section.info-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+}
