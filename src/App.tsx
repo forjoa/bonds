@@ -11,6 +11,7 @@ import { Toaster } from 'sonner'
 import { UserProvider } from './context/AppContext'
 import { SocketProvider } from './context/SocketContext'
 import Register from './components/pages/Register'
+import MyProfile from './components/pages/MyProfile'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path='/messages' element={<Messages />} />
                 <Route path='/notifications' element={<Notifications />} />
                 <Route path='/upload' element={<Upload />} />
+                <Route path='/myprofile' element={<MyProfile />}/>
               </Route>
 
               {/* public routes */}
