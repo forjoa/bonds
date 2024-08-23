@@ -26,7 +26,7 @@ export default function PostCard({ post }: { post: PostsHomeI }) {
   const onLike = async () => {
     const newLikeState = !userLiked
     setUserLiked(newLikeState)
-    setLikeCount(newLikeState ? likeCount + 1 : likeCount - 1)
+    setLikeCount(newLikeState ? Number(likeCount) + 1 : likeCount - 1)
 
     if (socket) {
       socket.emit('like', {
