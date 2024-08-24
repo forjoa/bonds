@@ -6,6 +6,7 @@ import { IconX } from '@tabler/icons-react'
 import { useUser } from '../../context/AppContext'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router'
+import Loading from '../ui/Loading'
 
 export default function Upload() {
   const [files, setFiles] = useState<string[]>([])
@@ -50,42 +51,42 @@ export default function Upload() {
     <Container>
       <h1>Upload</h1>
       <div className='upload-post-container'>
-      <form className='upload-post' onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='Your content here'
-          className='content'
-          onChange={(e) => setContent(e.target.value)}
-        />
-        <UploadFiles
-          files={files}
-          setFiles={setFiles}
-          loading={loading}
-          setLoading={setLoading}
-        />
-        {loading ? (
-          <span className='subtitle'>Uploading...</span>
-        ) : (
-          <div className='preview-container'>
-            {files.map((file, index) => (
-              <div key={index} className='preview-item'>
-                {file.includes('image') ? (
-                  <img src={file} alt={`Preview ${index + 1}`} />
-                ) : (
-                  <video src={file} controls />
-                )}
-                <button
-                  className='remove-btn'
-                  onClick={() => removeFile(index)}
-                >
-                  <IconX size={18} />
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-        <input type='submit' value='Upload post' className='submit' />
-      </form>
+        <form className='upload-post' onSubmit={handleSubmit}>
+          <input
+            type='text'
+            placeholder='Your content here'
+            className='content'
+            onChange={(e) => setContent(e.target.value)}
+          />
+          <UploadFiles
+            files={files}
+            setFiles={setFiles}
+            loading={loading}
+            setLoading={setLoading}
+          />
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className='preview-container'>
+              {files.map((file, index) => (
+                <div key={index} className='preview-item'>
+                  {file.includes('image') ? (
+                    <img src={file} alt={`Preview ${index + 1}`} />
+                  ) : (
+                    <video src={file} controls />
+                  )}
+                  <button
+                    className='remove-btn'
+                    onClick={() => removeFile(index)}
+                  >
+                    <IconX size={18} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <input type='submit' value='Upload post' className='submit' />
+        </form>
       </div>
     </Container>
   )
