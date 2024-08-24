@@ -32,22 +32,40 @@ const PostCard = forwardRef<HTMLDivElement, PostCardProps>(({ post }, ref) => {
     setUserLiked(newLikeState)
     setLikeCount(newLikeState ? Number(likeCount) + 1 : likeCount - 1)
 
-    if (socket) {
-      socket.emit('like', {
-        postId: post.postid,
-        userId: post.userid,
-        targetUserId: post.userid,
-      })
-    }
-
     if ('userid' in user) {
-      await fetch(`${import.meta.env.VITE_API_URL}/api/posts/like`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userid: user.userid, postid: post.postid }),
-      })
+      const result = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/posts/like`,
+        {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userid: user.userid, postid: post.postid }),
+        }
+      ).then((res) => res.json())
+
+      if (socket) {
+        socket.emit('like', {
+          postId: post.postid,
+          userId: post.userid,
+          targetUserId: post.userid,
+        })
+      }
+
+      await fetch(
+        `${import.meta.env.VITE_API_URL}/api/notifications/newNotification`,
+        {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userid: post.userid,
+            type: 'like',
+            referenceid: result.referenceid,
+          }),
+        }
+      )
     }
   }
 
@@ -82,6 +100,21 @@ const PostCard = forwardRef<HTMLDivElement, PostCardProps>(({ post }, ref) => {
       setComment('')
 
       if (result.success) {
+        await fetch(
+          `${import.meta.env.VITE_API_URL}/api/notifications/newNotification`,
+          {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userid: post.userid,
+              type: 'comment',
+              referenceid: result.referenceid,
+            }),
+          }
+        )
+
         setComments([
           ...comments,
           { fullname: user.fullname, content: comment },
