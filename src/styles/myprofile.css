@@ -8,7 +8,7 @@
 
     & section.image-container {
         width: 150px;
-        
+
         & img {
             aspect-ratio: 1 / 1;
             object-fit: cover;
