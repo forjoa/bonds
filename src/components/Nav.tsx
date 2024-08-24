@@ -78,12 +78,12 @@ export default function Nav({ children }: NavProps) {
                   <Link to={route.route}>
                     {pathname === route.route ? (
                       <>
-                        <route.iconSelected size={30} />
+                        <route.iconSelected size={30} stroke={1.5} />
                         <p>{route.name}</p>
                       </>
                     ) : (
                       <>
-                        <route.icon size={30} />
+                        <route.icon size={30} stroke={1.5} />
                         <p>{route.name}</p>
                       </>
                     )}
@@ -102,7 +102,7 @@ export default function Nav({ children }: NavProps) {
           </ul>
         </div>
         <button onClick={logOut}>
-          <IconLogout size={40} />
+          <IconLogout size={40} stroke={1.5} />
         </button>
       </nav>
       {children}
