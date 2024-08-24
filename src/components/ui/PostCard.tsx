@@ -70,6 +70,15 @@ const PostCard = forwardRef<HTMLDivElement, PostCardProps>(({ post }, ref) => {
         }
       ).then((res) => res.json())
 
+      if (socket) {
+        socket.emit('comment', {
+          postId: post.postid,
+          userId: post.userid,
+          targetUserId: post.userid,
+          comment,
+        })
+      }
+
       setComment('')
 
       if (result.success) {
