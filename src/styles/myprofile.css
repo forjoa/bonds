@@ -1,6 +1,10 @@
 .profile-header {
     display: flex;
     gap: 20px;
+    border: 1px solid var(--light-gray);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 
     & section.image-container {
         width: 150px;
