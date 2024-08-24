@@ -14,6 +14,7 @@ import {
 } from '@tabler/icons-react'
 import '../styles/nav.css'
 import { ReactNode } from 'react'
+import { useUser } from '../context/AppContext'
 
 interface NavProps {
   children: ReactNode
@@ -22,6 +23,7 @@ interface NavProps {
 export default function Nav({ children }: NavProps) {
   const { pathname } = useLocation()
   const navigation = useNavigate()
+  const { user } = useUser()
 
   const routes = [
     {
@@ -89,6 +91,14 @@ export default function Nav({ children }: NavProps) {
                 </li>
               )
             })}
+            {'profilephoto' in user && (
+              <li>
+                <Link to={'/myprofile'}>
+                  <img src={user.profilephoto as string} />
+                  <p>Profile</p>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
         <button onClick={logOut}>
