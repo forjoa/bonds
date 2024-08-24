@@ -3,6 +3,7 @@ import { UserI } from '../../types/types'
 import { toast } from 'sonner'
 import '../../styles/registerphoto.css'
 import { IconUpload } from '@tabler/icons-react'
+import Loading from '../ui/Loading'
 
 interface RegisterPhotoI {
   setUser: Dispatch<SetStateAction<UserI>>
@@ -62,7 +63,7 @@ export default function RegisterPhoto({ setUser }: RegisterPhotoI) {
       )}
 
       {loading ? (
-        <span className='subtitle'>Loading...</span>
+        <Loading />
       ) : (
         image && <img src={image} alt='Uploaded image' />
       )}
