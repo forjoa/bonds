@@ -7,6 +7,7 @@ import '../../styles/home.css'
 import '@egjs/react-flicking/dist/flicking.css'
 import PostCard from '../ui/PostCard'
 import { ViewportSlot } from '@egjs/react-flicking'
+import Loading from '../ui/Loading'
 
 export default function Home() {
   const [posts, setPosts] = useState<PostsHomeI[]>([])
@@ -64,7 +65,7 @@ export default function Home() {
             ref={index === posts.length - 1 ? lastPostRef : null}
           />
         ))}
-        {loading && <p>Loading more posts...</p>}
+        {loading && <Loading />}
         <ViewportSlot>
           <div className='flicking-panel last-panel' />
         </ViewportSlot>
