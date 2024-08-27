@@ -1,10 +1,11 @@
 .profile-header {
     display: flex;
     gap: 20px;
-    border: 1px solid var(--light-gray);
+    background: var(--light-gray);
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
 
     & section.image-container {
         width: 150px;
