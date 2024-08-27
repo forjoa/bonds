@@ -6,7 +6,6 @@ import type { PostsHomeI, UserI } from '../../types/types'
 import '../../styles/myprofile.css'
 import PostCard from '../ui/PostCard'
 import { ViewportSlot } from '@egjs/react-flicking'
-import Loading from '../ui/Loading'
 
 export default function MyProfile() {
   const [posts, setPosts] = useState<PostsHomeI[]>([])
@@ -85,7 +84,7 @@ export default function MyProfile() {
             ref={index === posts.length - 1 ? lastPostRef : null}
           />
         ))}
-        {loading && <Loading />}
+        {loading && <p>Loading more posts...</p>}
         <ViewportSlot>
           <div className='flicking-panel last-panel' />
         </ViewportSlot>
