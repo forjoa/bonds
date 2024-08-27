@@ -8,4 +8,6 @@
     backdrop-filter: blur(24px);
     display: grid;
     place-items: center;
+    top: 0;
+    left: 0;
 }
