@@ -133,7 +133,7 @@ const PostCard = forwardRef<HTMLDivElement, PostCardProps>(({ post }, ref) => {
       {' '}
       <header>
         {post.profilephoto && <img src={post.profilephoto} alt='User photo' />}
-        <nav onClick={() => navigate(`/users/${post.userid}`)}>
+        <nav onClick={() => navigate(`/${post.username}`)}>
           <p>{post.fullname}</p>
           <span className='subtitle'>@{post.username}</span>
         </nav>
