@@ -12,6 +12,7 @@ import { UserProvider } from './context/AppContext'
 import { SocketProvider } from './context/SocketContext'
 import Register from './components/pages/Register'
 import MyProfile from './components/pages/MyProfile'
+import PostPage from './components/pages/PostPage'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path='/notifications' element={<Notifications />} />
                 <Route path='/upload' element={<Upload />} />
                 <Route path='/myprofile' element={<MyProfile />}/>
+                <Route path='/p/:id' element={<PostPage />}/>
               </Route>
 
               {/* public routes */}
