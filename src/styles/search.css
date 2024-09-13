@@ -1,0 +1,22 @@
+@import url('index.css');
+
+.searcher-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    gap: 20px;
+
+    & a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        & img {
+            aspect-ratio: 1 / 1;
+            width: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+}
