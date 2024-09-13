@@ -12,6 +12,7 @@ import {
 import { useSocket } from '../../context/SocketContext'
 import { useUser } from '../../context/AppContext'
 import { toast } from 'sonner'
+import Avatar from './Avatar'
 
 interface PostCardProps {
   post: PostsHomeI
@@ -132,7 +133,7 @@ const PostCard = forwardRef<HTMLDivElement, PostCardProps>(({ post }, ref) => {
     <section ref={ref}>
       {' '}
       <header>
-        {post.profilephoto && <img src={post.profilephoto} alt='User photo' />}
+        <Avatar profilephoto={post.profilephoto} username={post.username} />
         <nav onClick={() => navigate(`/${post.username}`)}>
           <p>{post.fullname}</p>
           <span className='subtitle'>@{post.username}</span>

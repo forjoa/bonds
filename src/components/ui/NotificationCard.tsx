@@ -1,5 +1,6 @@
 import { IconThumbUpFilled, IconMessageFilled } from '@tabler/icons-react'
 import { NotificationInfoI } from '../../types/types'
+import Avatar from './Avatar'
 
 type NotificationType = 'like' | 'comment'
 
@@ -32,9 +33,9 @@ export default function NotificationCard({
       className={notification.seen ? '' : 'not-seen'}
     >
       {!notification.seen && <div className='seen'></div>}
-      <img
-        src={notification.profilephoto}
-        alt={`${notification.username} profile photo`}
+      <Avatar
+        profilephoto={notification.profilephoto}
+        username={notification.username}
       />
       <div className='icon-type'>{config.icon}</div>
       <p>
