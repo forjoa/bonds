@@ -68,3 +68,12 @@ export interface PostsHomeI {
   userliked: boolean
   comments: CommentInPostI[]
 }
+
+export interface NotificationInfoI {
+  type: string
+  referenceid: number
+  username: string
+  profilephoto: string
+  seen: boolean
+  postid: number
+}

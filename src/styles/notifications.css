@@ -1,0 +1,40 @@
+@import url('index.css');
+
+.notifications-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+
+    & a {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        padding: 10px 20px;
+
+        & .seen {
+            background-color: #fff;
+            border-radius: 50%;
+            width: 10px;
+            aspect-ratio: 1 / 1;
+        }
+
+        & img {
+            aspect-ratio: 1 / 1;
+            width: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        & .icon-type {
+            margin-left: -25px;
+            margin-bottom: -40px;
+        }
+
+        &.not-seen {
+            margin-bottom: 10px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+        }
+    }
+}
