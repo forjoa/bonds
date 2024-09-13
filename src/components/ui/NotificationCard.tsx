@@ -27,10 +27,21 @@ export default function NotificationCard({
 }) {
   const config = notificationConfigs[notification.type as NotificationType]
 
+  const markAsRead = (id: number) => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/notifications/markAsRead`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+  }
+
   return (
     <a
       href={`/p/${notification.postid}`}
       className={notification.seen ? '' : 'not-seen'}
+      onClick={() => markAsRead(notification.notificationid)}
     >
       {!notification.seen && <div className='seen'></div>}
       <Avatar

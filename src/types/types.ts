@@ -76,4 +76,5 @@ export interface NotificationInfoI {
   profilephoto: string
   seen: boolean
   postid: number
+  notificationid: number
 }
