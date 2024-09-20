@@ -6,6 +6,7 @@ import type { PostsHomeI, UserI } from '../../types/types'
 import '../../styles/myprofile.css'
 import PostCard from '../ui/PostCard'
 import { ViewportSlot } from '@egjs/react-flicking'
+import Avatar from '../ui/Avatar'
 
 export default function MyProfile() {
   const [posts, setPosts] = useState<PostsHomeI[]>([])
@@ -67,7 +68,7 @@ export default function MyProfile() {
     <Container>
       <header className='profile-header'>
         <section className='image-container'>
-          <img src={user.profilephoto as string} alt='User profile photo' />
+          <Avatar profilephoto={user.profilephoto as string} username='' />
         </section>
         <section className='info-container'>
           <h3>{user.fullname}</h3>

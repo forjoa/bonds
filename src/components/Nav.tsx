@@ -15,6 +15,7 @@ import {
 import '../styles/nav.css'
 import { ReactNode } from 'react'
 import { useUser } from '../context/AppContext'
+import Avatar from './ui/Avatar'
 
 interface NavProps {
   children: ReactNode
@@ -94,7 +95,10 @@ export default function Nav({ children }: NavProps) {
             {'profilephoto' in user && (
               <li>
                 <Link to={'/myprofile'}>
-                  <img src={user.profilephoto as string} />
+                  <Avatar
+                    profilephoto={user.profilephoto as string}
+                    username=''
+                  />
                   <p>Profile</p>
                 </Link>
               </li>
