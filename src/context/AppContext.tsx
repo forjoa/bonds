@@ -12,6 +12,7 @@ const UserContext = createContext<UserContextType>({
   user: {},
   setUser: () => {},
   loading: true,
+  setTokenIsValid: () => {},
 })
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
@@ -44,7 +45,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
   }, [])
 
   return (
-    <UserContext.Provider value={{ tokenIsValid, user, setUser, loading }}>
+    <UserContext.Provider value={{ tokenIsValid, user, setUser, loading, setTokenIsValid }}>
       {children}
     </UserContext.Provider>
   )
