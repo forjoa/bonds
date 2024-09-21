@@ -19,6 +19,15 @@ export default function Home() {
   const lastPostRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
+    const hasReloaded = sessionStorage.getItem('hasReloaded')
+
+    if (!hasReloaded) {
+      sessionStorage.setItem('hasReloaded', 'true')
+      window.location.reload()
+    }
+  }, [])
+
+  useEffect(() => {
     const loadPosts = async () => {
       if ('userid' in user && !loading) {
         setLoading(true)
@@ -38,8 +47,7 @@ export default function Home() {
     }
 
     loadPosts()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, page])
+  }, [user, page, loading])
 
   useEffect(() => {
     if (observer.current) observer.current.disconnect()
@@ -64,7 +72,7 @@ export default function Home() {
             ref={index === posts.length - 1 ? lastPostRef : null}
           />
         ))}
-        {loading && <p>Loading more posts...</p> }
+        {loading && <p>Loading more posts...</p>}
         <ViewportSlot>
           <div className='flicking-panel last-panel' />
         </ViewportSlot>
