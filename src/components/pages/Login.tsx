@@ -4,11 +4,13 @@ import { FormEvent, useState } from 'react'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
+import { useUser } from '../../context/AppContext'
 
 export default function Login() {
   const [email, setEmail] = useState<string>()
   const [password, setPassword] = useState<string>()
   const navigate = useNavigate()
+  const { setTokenIsValid } = useUser()
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -28,6 +30,7 @@ export default function Login() {
         toast.error(result.message)
       } else {
         localStorage.setItem('userbonds', result.token)
+        setTokenIsValid(true)
         navigate('/')
       }
     } catch (e) {
@@ -51,7 +54,9 @@ export default function Login() {
 
         <input type='submit' value='Send' />
       </form>
-      <Link to='/register' className='link-form'>Sign up</Link>
+      <Link to='/register' className='link-form'>
+        Sign up
+      </Link>
     </Modal>
   )
 }
