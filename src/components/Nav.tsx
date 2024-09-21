@@ -61,6 +61,7 @@ export default function Nav({ children }: NavProps) {
 
   function logOut() {
     localStorage.removeItem('userbonds')
+    sessionStorage.removeItem('hasReloaded')
     navigation('/login')
   }
 
