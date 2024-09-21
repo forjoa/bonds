@@ -36,6 +36,7 @@ export interface UserContextType {
   user: UserI | object
   setUser: Dispatch<SetStateAction<UserI>>
   loading: boolean
+  setTokenIsValid: Dispatch<SetStateAction<boolean>>
 }
 
 export interface SocketContextType {
