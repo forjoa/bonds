@@ -13,6 +13,7 @@ import { SocketProvider } from './context/SocketContext'
 import Register from './components/pages/Register'
 import MyProfile from './components/pages/MyProfile'
 import PostPage from './components/pages/PostPage'
+import UserProfile from './components/pages/UserProfile'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path='/upload' element={<Upload />} />
                 <Route path='/myprofile' element={<MyProfile />}/>
                 <Route path='/p/:id' element={<PostPage />}/>
+                <Route path='/u/:ui' element={<UserProfile />}/>
               </Route>
 
               {/* public routes */}
