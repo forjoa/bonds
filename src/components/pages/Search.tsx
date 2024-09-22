@@ -42,7 +42,7 @@ export default function Search() {
           value={searchTerm}
         />
         {searchTerm && filteredUsers.map((user, index) => (
-          <a href={`/${user.username}`} key={index}>
+          <a href={`/u/${user.username}+${user.userid}`} key={index}>
             <Avatar profilephoto={user.profilephoto} username={user.username} />
             <p>{user.fullname}</p>
           </a>
