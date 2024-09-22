@@ -79,3 +79,10 @@ export interface NotificationInfoI {
   postid: number
   notificationid: number
 }
+
+export interface ProfileHeaderProps {
+  profilephoto: string
+  fullname: string
+  username: string
+  bio: string
+}

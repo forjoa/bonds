@@ -1,54 +1,39 @@
-import { useEffect, useState, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import Container from '../ui/Container'
-import { getMyPosts } from '../../lib/getMyPosts'
-import { useUser } from '../../context/AppContext'
-import type { PostsHomeI, UserI } from '../../types/types'
-import '../../styles/myprofile.css'
+import ProfileHeader from '../ui/ProfileHeader'
+import { useEffect, useRef, useState } from 'react'
+import { getUserInfo } from '../../lib/getUserInfo'
+import { PostsHomeI, UserI } from '../../types/types'
 import PostCard from '../ui/PostCard'
 import { ViewportSlot } from '@egjs/react-flicking'
-import ProfileHeader from '../ui/ProfileHeader'
 
-export default function MyProfile() {
+export default function UserProfile() {
   const [posts, setPosts] = useState<PostsHomeI[]>([])
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(false)
   const [hasMore, setHasMore] = useState<boolean>(true)
-  const { user } = useUser()
   const observer = useRef<IntersectionObserver | null>(null)
-
-  const isUserI = (user: object): user is UserI => {
-    return (
-      user &&
-      typeof user === 'object' &&
-      'userid' in user &&
-      'username' in user &&
-      'fullname' in user &&
-      'profilephoto' in user
-    )
-  }
+  const { ui } = useParams()
+  const username = ui?.split('+')[0]
+  const userid = ui?.split('+')[1]
+  const [user, setUser] = useState<UserI | null>(null)
 
   useEffect(() => {
-    const loadPosts = async () => {
-      if ('userid' in user && !loading) {
+    if (ui) {
+      const getAllUser = async () => {
         setLoading(true)
-        const res = await getMyPosts(user.userid as number, page, 5)
-
-        setPosts((prevPosts) => {
-          const newPosts = res.filter(
-            (post: PostsHomeI) =>
-              !prevPosts.some((p) => p.postid === post.postid)
-          )
-          return [...prevPosts, ...newPosts]
-        })
+        const res = await getUserInfo(parseInt(userid as string), page, 5)
+        setPosts(res.posts)
+        setUser(res.user)
 
         setHasMore(res.length > 0)
         setLoading(false)
       }
-    }
 
-    loadPosts()
+      getAllUser()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, page])
+  }, [ui])
 
   const lastPostRef = useRef<HTMLDivElement | null>(null)
 
@@ -64,13 +49,13 @@ export default function MyProfile() {
     if (lastPostRef.current) observer.current.observe(lastPostRef.current)
   }, [hasMore, loading])
 
-  return isUserI(user) ? (
+  return (
     <Container>
       <ProfileHeader
-        profilephoto={user.profilephoto as string}
-        fullname={user.fullname}
-        username={user.username}
-        bio={user.bio}
+        profilephoto={user?.profilephoto as string}
+        fullname={user?.fullname as string}
+        username={username as string}
+        bio={user?.bio as string}
       />
       <aside className='posts-container'>
         <h1>Posts</h1>
@@ -87,7 +72,5 @@ export default function MyProfile() {
         </ViewportSlot>
       </aside>
     </Container>
-  ) : (
-    <p>User not found or invalid user data</p>
   )
 }
