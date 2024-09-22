@@ -29,8 +29,8 @@ export default function Home() {
 
   useEffect(() => {
     const loadPosts = async () => {
-      if ('userid' in user && !loading) {
-        setLoading(true)
+      setLoading(true)
+      if ('userid' in user) {
         const res = await getHome(user.userid as number, page, 5)
 
         setPosts((prevPosts) => {
@@ -42,12 +42,12 @@ export default function Home() {
         })
 
         setHasMore(res.length > 0)
-        setLoading(false)
       }
+      setLoading(false)
     }
 
     loadPosts()
-  }, [user, page, loading])
+  }, [user, page])
 
   useEffect(() => {
     if (observer.current) observer.current.disconnect()
