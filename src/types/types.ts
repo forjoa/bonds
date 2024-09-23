@@ -85,4 +85,5 @@ export interface ProfileHeaderProps {
   fullname: string
   username: string
   bio: string
+  myprofile: boolean
 }
