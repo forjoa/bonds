@@ -56,6 +56,7 @@ export default function UserProfile() {
         fullname={user?.fullname as string}
         username={username as string}
         bio={user?.bio as string}
+        myprofile={false}
       />
       <aside className='posts-container'>
         <h1>Posts</h1>
