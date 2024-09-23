@@ -1,11 +1,16 @@
 .profile-header {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
     background: var(--light-gray);
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+
+    & div {
+        display: flex;
+        gap: 20px;
+    }
 
     & section.image-container {
         width: 150px;
@@ -22,5 +27,21 @@
         flex-direction: column;
         justify-content: center;
         gap: 10px;
+    }
+
+    & button {
+        background-color: white;
+        color: black;
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            opacity: .5;
+        }
     }
 }
