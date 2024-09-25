@@ -110,6 +110,11 @@ select {
   }
 }
 
+input:disabled {
+  background-color: var(--light-gray);
+  color: var(--subtitle)
+}
+
 button {
   cursor: pointer;
 }
